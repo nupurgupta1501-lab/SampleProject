@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "SampleApp"
 include(":app")
- 
+include(":datamodule")
+include(":feature-user")
+include(":domain")

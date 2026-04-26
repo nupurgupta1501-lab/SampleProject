@@ -5,29 +5,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.demo.sampleapp.view.compose.UserDetailScreen
-import com.demo.sampleapp.view.compose.UserListScreen
-import com.demo.sampleapp.viewmodel.UserListViewModel
+import com.demo.feature_user.view.navigation.UserRoutes
+import com.demo.feature_user.view.navigation.userNavGraph
+import com.demo.feature_user.viewmodel.UserListViewModel
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
     val sharedViewModel: UserListViewModel = hiltViewModel()
     NavHost(
         navController = navController,
-        startDestination = "userList"
+        startDestination = UserRoutes.LIST
     ) {
-        composable("userList") {
-            UserListScreen(
-                onUserClick = { user ->
-                    sharedViewModel.selectUser(user)
-                    navController.navigate("userDetail")
-                }
-            )
-        }
-        composable(
-            route = "userDetail",
-        ) { backStackEntry ->
-            UserDetailScreen(sharedViewModel)
-        }
+        userNavGraph(navController, sharedViewModel)
     }
 }
